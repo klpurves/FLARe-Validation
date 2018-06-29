@@ -555,7 +555,7 @@ Valextapp <-  ggplot(datta,
                      aes(Trials,Mean,
                          color=Stimulus))         +
   geom_point(position='dodge')                       +
-  geom_line()                                        +
+  geom_line(size=1)                                        +
   geom_ribbon(aes(ymin=ci_low, ymax=ci_high,
                   fill=Stimulus),
               linetype=2, alpha=0.1)               +

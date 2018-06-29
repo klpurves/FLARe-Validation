@@ -40,18 +40,18 @@ genpallete <- c("#002D64","#27437D", "#445A97", "#5F72B2","#7A8CCE","#ACB9EA")  
 ### SET UP TEXT SIZE HERE ########
 
 
-x.title <- 12
-y.title <- 24
+title.x <- 12
+title.y <- 24
 
-x.text <-  24
-y.text <- 24
-axis.text <-  24
+text.x <-  24
+text.y <- 24
+text.axis <-  24
 
 strip.title <-
 
-legend.title <- 
-legend.text <-
-legend.size <-
+title.legend <- 
+text.legend <-
+size.legend <-
 
 caption <- 30
   
@@ -568,20 +568,20 @@ Valextapp <-  ggplot(datta,
   labs(y="Mean expectancy rating\n",
       subtitle = "\n\n")                 +
   theme(plot.subtitle = element_text(face = "italic",
-                                     size = 28),
+                                     size = caption),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.text = element_text(face = "bold",
-                                 size = axis.text),
+                                 size = text.axis),
         strip.text = element_text(face = "bold",
                                   size = strip.title),
-        legend.key = element_rect(size = 3),
-        legend.key.size = unit(3, 'lines'),
+        legend.key = element_rect(size = title.legend),
+        legend.key.size = unit(size.legend, 'lines'),
         axis.title = element_text(face = "bold",
-                                  size = 28),
+                                  axis.text = text.axis),
         legend.text = element_text(face = "bold",
-                                   size = 20),
-        legend.title = element_text(size = 28),
+                                   size = text.legend),
+        legend.title = element_text(size = title.legend),
         panel.spacing.x=unit(0, "lines"))              +
   scale_y_continuous(limits = c(0,9),
                      breaks = c(seq(0,9)))      +
@@ -609,20 +609,20 @@ Valextlab <-  ggplot(dattl,
   labs(y="Mean expectancy rating\n",
        subtitle = "\n\n")                 +
   theme(plot.subtitle = element_text(face = "italic",
-                                     size = 28),
+                                     size = caption),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.text = element_text(face = "bold",
-                                 size = 18),
+                                 size = text.axis),
         strip.text = element_text(face = "bold",
-                                  size = 24),
+                                  size = strip.title),
         legend.key = element_rect(size = 3),
-        legend.key.size = unit(3, 'lines'),
+        legend.key.size = unit(size.legend, 'lines'),
         axis.title = element_text(face = "bold",
-                                  size = 28),
+                                  size = title.y),
         legend.text = element_text(face = "bold",
-                                   size = 20),
-        legend.title = element_text(size = 28),
+                                   size = text.legend),
+        legend.title = element_text(size = title.legend),
         panel.spacing.x=unit(0, "lines"))              +
   scale_y_continuous(limits = c(0,9),
                      breaks = c(seq(0,9)))      +
@@ -761,23 +761,23 @@ ValGapp <-  ggplot(datta,
   labs(y="Mean expectancy rating\n",
        subtitle = "\n\n")                 +
   theme(plot.subtitle = element_text(face = "italic",
-                                     size = 28),
+                                     size = caption),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         plot.title = element_text(face = "bold",
-                                  size = 36),
+                                  size = title.y),
         axis.title.x = element_blank(),
         axis.text = element_text(face = "bold",
-                                   size = 18),
+                                   size = text.x),
         strip.text = element_text(face = "bold",
-                                  size = 24),
+                                  size = strip.title),
         legend.position = "none",
         axis.title.y = element_text(face = "bold",
-                                    size = 28),
+                                    size = text.y),
         legend.text = element_text(face = "bold",
-                                   size = 26),
+                                   size = text.legend),
         legend.title = element_text(face = "bold",
-                                    size = 34))                  + 
+                                    size = title.legend))                  + 
   scale_y_continuous(limits = c(0,9),
                      breaks = c(seq(0,9)))                       +
   theme(plot.margin = unit(c(0.6, 0.6, 0.6, 0.6), "cm"))  
@@ -807,25 +807,25 @@ ValGlab <-  ggplot(dattl,
   labs(y="Mean expectancy rating\n",
        subtitle = "\n\n")                 +
   theme(plot.subtitle = element_text(face = "italic",
-                                     size = 28),
+                                     size = caption),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         plot.title = element_text(face = "bold",
-                                  size = 36),
+                                  size = title.y),
         axis.title.x = element_blank(),
         axis.text.y = element_text(face = "bold",
-                                   size = 18),
+                                   size = text.y),
         axis.text.x = element_text(face="bold",
-                                   size=18),
+                                   size= text.x),
         strip.text = element_text(face = "bold",
-                                  size = 24),
+                                  size = strip.title),
         legend.position = "none",
         axis.title.y = element_text(face = "bold",
-                                    size = 28),
+                                    size = title.y),
         legend.text = element_text(face = "bold",
-                                   size = 26),
+                                   size = text.legend),
         legend.title = element_text(face = "bold",
-                                    size = 34))                  + 
+                                    size = title.legend))                  + 
   scale_y_continuous(limits = c(0,9),
                      breaks = c(seq(0,9)))                       +
   theme(plot.margin = unit(c(0.6, 0.6, 0.6, 0.6), "cm"))  

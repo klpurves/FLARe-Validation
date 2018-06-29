@@ -7,6 +7,41 @@
 ###
 
 
+###		  ###
+
+
+# Set up data ######		
+		
+# Clear workspace		
+		
+rm(list=ls())		
+		
+		
+## Load dependencies ####		
+		
+library(ggplot2)		
+library(psych)		
+library(dplyr)		
+library(foreign)		
+library(ggExtra)		
+library(grid)		
+library(gridExtra)		
+library(cowplot)		
+library(plotly)		
+		
+
+### set up plotting palletes etc #########		
+
+dodge <- position_dodge(width = 0.85)		
+
+cbPalette <- c("#D55E00","#0072B2",  "#CC79A7","#FF9933", "#6699FF", "#009E73", "#F0E442")		
+
+PMpallette <- c("#002D64","#ACB9EA")                                                #### CS+ /  CS - colours (acq, ext, ren, affective)		
+genpallete <- c("#002D64","#27437D", "#445A97", "#5F72B2","#7A8CCE","#ACB9EA")      #### CS+, Gen, CS- colours (generalisation)		
+		
+
+### SET UP TEXT SIZE HERE ########
+
 ### SET UP TEXT SIZE HERE ########
 
 

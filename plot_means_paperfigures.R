@@ -7,40 +7,35 @@
 ###
 
 
-###		  ###
+# Set up data ######
+
+# Clear workspace
+
+rm(list=ls())
 
 
-# Set up data ######		
-		
-# Clear workspace		
-		
-rm(list=ls())		
-		
-		
-## Load dependencies ####		
-		
-library(ggplot2)		
-library(psych)		
-library(dplyr)		
-library(foreign)		
-library(ggExtra)		
-library(grid)		
-library(gridExtra)		
-library(cowplot)		
-library(plotly)		
-		
+## Load dependencies ####
 
-### set up plotting palletes etc #########		
+library(ggplot2)
+library(psych)
+library(dplyr)
+library(foreign)
+library(ggExtra)
+library(grid)
+library(gridExtra)
+library(cowplot)
+library(plotly)
 
-dodge <- position_dodge(width = 0.85)		
 
-cbPalette <- c("#D55E00","#0072B2",  "#CC79A7","#FF9933", "#6699FF", "#009E73", "#F0E442")		
+### set up plotting palletes etc #########
 
-PMpallette <- c("#002D64","#ACB9EA")                                                #### CS+ /  CS - colours (acq, ext, ren, affective)		
-genpallete <- c("#002D64","#27437D", "#445A97", "#5F72B2","#7A8CCE","#ACB9EA")      #### CS+, Gen, CS- colours (generalisation)		
-		
+dodge <- position_dodge(width = 0.85)
 
-### SET UP TEXT SIZE HERE ########
+cbPalette <- c("#D55E00","#0072B2",  "#CC79A7","#FF9933", "#6699FF", "#009E73", "#F0E442")
+
+PMpallette <- c("#002D64","#ACB9EA")                                                #### CS+ /  CS - colours (acq, ext, ren, affective)
+genpallete <- c("#002D64","#27437D", "#445A97", "#5F72B2","#7A8CCE","#ACB9EA")      #### CS+, Gen, CS- colours (generalisation)
+
 
 ### SET UP TEXT SIZE HERE ########
 
@@ -53,13 +48,13 @@ text.y <- 24
 text.axis <-  24
 
 strip.title <-
-  
-  title.legend <- 
-  text.legend <-
-  size.legend <-
-  
-  caption <- 30
 
+title.legend <- 
+text.legend <-
+size.legend <-
+
+caption <- 30
+  
 figure.w <- 20000
 figure.l <- 25000
 res <- 700
@@ -79,30 +74,16 @@ data <- "/Volumes/groups/Eley\ Group/Projects/FLARe/Test-retest\ study/Data_Mana
 datl <- "/Volumes/groups/Eley Group/Projects/FLARe/Test-retest study/Data_Management_Lab/Step4_Master_Datasets/Dataset/4_full_master_dataset_LabTRT_ec_0418.sav"
 
 
-# ## Set up my paths and filenames for data access and saving  SARAH ####
-# 
-# path <- "/Volumes/groups/Eley\ Group/Projects/FLARe/FLARe Remote/Data_Management_Remote/Step4_Master_Datasets/Dataset/"
-# orderpath <-  "/Volumes/groups/Eley Group/Projects/FLARe/Data_Storage/FLARe_Task_VALIDATION/ZOHO/"
-# data <- "/Volumes/groups/Eley\ Group/Projects/FLARe/Test-retest\ study/Data_Management_App/Step4_Master_Datasets/Dataset/4_full_master_dataset_apptrt_ec_0418.sav"
-# datl <- "/Volumes/groups/Eley Group/Projects/FLARe/Test-retest study/Data_Management_Lab/Step4_Master_Datasets/Dataset/4_full_master_dataset_LabTRT_ec_0418.sav"
-# 
-# 
-# plotsave <- "/Users/kirstin/Dropbox/SGDP/FLARe/Papers/FC_validation/Figures/ForPaper"
+## Set up my paths and filenames for data access and saving  SARAH ####
 
-## LABELS ####
+path <- "/Volumes/groups/Eley\ Group/Projects/FLARe/FLARe Remote/Data_Management_Remote/Step4_Master_Datasets/Dataset/"
+orderpath <-  "/Volumes/groups/Eley Group/Projects/FLARe/Data_Storage/FLARe_Task_VALIDATION/ZOHO/"
+data <- "/Volumes/groups/Eley\ Group/Projects/FLARe/Test-retest\ study/Data_Management_App/Step4_Master_Datasets/Dataset/4_full_master_dataset_apptrt_ec_0418.sav"
+datl <- "/Volumes/groups/Eley Group/Projects/FLARe/Test-retest study/Data_Management_Lab/Step4_Master_Datasets/Dataset/4_full_master_dataset_LabTRT_ec_0418.sav"
 
-labnames <- c(
-  `Baseline` = "Baseline",
-  `Post Extinction` = "Post extinction",
-  `Post Renewal` = "Post renewal",
-  `Acquisition` = "\nAcquisition",
-  `Generalisation` = "\nGeneralisation",
-  `Extinction` = "\nExtinction",
-  `Renewal` = "\nRenewal",
-  `Trials` = "Trial number",
-  `Expectancy ratings` = "Expectancy ratings",
-  ` ` = " "
-)
+
+plotsave <- "/Users/kirstin/Dropbox/SGDP/FLARe/Papers/FC_validation/Figures/ForPaper"
+
 
 
 ## Set the working directory to wherever I am saving my figures...
@@ -381,6 +362,19 @@ datl$FCQ2_NA_CSp <-(datl$FCQ2FeaCSp+
                       datl$FCQ2AroCSp)/3
 
 
+# set up facet labels ########
+
+labnames <- c(
+  `Baseline` = "Baseline",
+  `Post Extinction` = "Post extinction",
+  `Post Renewal` = "Post renewal",
+  `Acquisition` = "Acquisition",
+  `Generalisation` = "Generalisation",
+  `Extinction` = "Extinction",
+  `Renewal` = "Renewal",
+  `Trials` = "Trial number"
+)
+
 # FIGURE 1: Means by Trial ######
 
 
@@ -546,17 +540,11 @@ datt$Phase <- factor(datt$Phase,
 datt$Stimulus <- factor(datt$Stimulus, 
                         levels = c("CS+","CS-"))
 
-datt$Exp <- "Expectancy ratings"
-
-datt$Exp <- factor(datt$Exp, levels=c("Expectancy ratings"," "))
 
 ### seperate into lab and app for aesthetic purposes #####
 
 datta <- datt[(datt$Mode == "App"),]
 dattl <- datt[(datt$Mode == "Lab"),]
-
-datta$Exp[25:68] <- " "
-dattl$Exp[25:68] <- " " 
 
 # Set up bar components
 
@@ -566,14 +554,13 @@ dattl$Exp[25:68] <- " "
 Valextapp <-  ggplot(datta,
                      aes(Trials,Mean,
                          color=Stimulus))         +
-  geom_point(size=2)                       +
-  geom_line(size =1)                                        +
-  geom_ribbon(aes(ymin=Mean-SEM, ymax=Mean+SEM,
+  geom_point(position='dodge')                       +
+  geom_line(size=1)                                        +
+  geom_ribbon(aes(ymin=ci_low, ymax=ci_high,
                   fill=Stimulus),
-              linetype=2, alpha=0.1,
-              size=.8)               +
+              linetype=2, alpha=0.1)               +
   scale_fill_manual(values=c(PMpallette)) +
-  facet_grid(. ~ Exp+Phase, scales = "free_x",
+  facet_grid(. ~ Phase, scales = "free_x",
              space = "free_x",
              labeller = as_labeller(labnames))             +
   theme_bw()                                         +
@@ -595,7 +582,6 @@ Valextapp <-  ggplot(datta,
         legend.text = element_text(face = "bold",
                                    size = text.legend),
         legend.title = element_text(size = title.legend),
-        legend.position = c(0.8,0.8),
         panel.spacing.x=unit(0, "lines"))              +
   scale_y_continuous(limits = c(0,9),
                      breaks = c(seq(0,9)))      +
@@ -608,15 +594,14 @@ Valextapp <-  ggplot(datta,
 Valextlab <-  ggplot(dattl,
                      aes(Trials,Mean,
                          color=Stimulus))         +
-  geom_point(size=2)                       +
-  geom_line(size =1)                                        +
-  geom_ribbon(aes(ymin=Mean-SEM, ymax=Mean+SEM,
+  geom_point(position='dodge')                       +
+  geom_line()                                        +
+  geom_ribbon(aes(ymin=ci_low, ymax=ci_high,
                   fill=Stimulus),
-              linetype=2, alpha=0.1,
-              size=.8)                +
+              linetype=2, alpha=0.1)               +
   scale_fill_manual(values=PMpallette) +
   
-  facet_grid(. ~ Exp+Phase, scales = "free_x",
+  facet_grid(. ~ Phase, scales = "free_x",
              space = "free_x",
              labeller = as_labeller(labnames))             +
   theme_bw()                                         +
@@ -638,7 +623,6 @@ Valextlab <-  ggplot(dattl,
         legend.text = element_text(face = "bold",
                                    size = text.legend),
         legend.title = element_text(size = title.legend),
-        legend.position = c(0.8,0.8),
         panel.spacing.x=unit(0, "lines"))              +
   scale_y_continuous(limits = c(0,9),
                      breaks = c(seq(0,9)))      +
@@ -733,9 +717,7 @@ datg$ci_high <- datg$Mean+(2*datg$SEM)
 
 ## Add phase labels ####
 
-datg$Exp <- 'Expectancy ratings'
 
-datg$Exp <- factor(datg$Exp, levels = c("Expectancy ratings", ""))
 ### order factor levels ######
 
 datg$Mode <- factor(datg$Mode, 
@@ -770,12 +752,9 @@ ValGapp <-  ggplot(datta,
                 position = position_dodge(.9),
                 width = .1)                          +
   geom_ribbon(aes(ymin = Mean - SEM, 
-              ymax = Mean + SEM),
-              linetype=2,
-              alpha=0.1,
-              size=.8) +
+              ymax = Mean + SEM)) +
   scale_color_manual(values=genpallete)               +
-  facet_grid(. ~ Exp+Phase,
+  facet_grid(. ~ Phase,
              labeller = as_labeller(labnames))       +
   theme_bw()                                         +
   
@@ -789,7 +768,7 @@ ValGapp <-  ggplot(datta,
                                   size = title.y),
         axis.title.x = element_blank(),
         axis.text = element_text(face = "bold",
-                                 size = text.x),
+                                   size = text.x),
         strip.text = element_text(face = "bold",
                                   size = strip.title),
         legend.position = "none",
@@ -819,12 +798,9 @@ ValGlab <-  ggplot(dattl,
                 position = position_dodge(.9),
                 width = .1)                          +
   geom_ribbon(aes(ymin = Mean - SEM, 
-                  ymax = Mean + SEM),
-              linetype=2,
-              alpha=0.1,
-              size=.8) +
+                  ymax = Mean + SEM)) +
   scale_color_manual(values=genpallete)               +
-  facet_grid(. ~ Exp+Phase,
+  facet_grid(. ~ Phase,
              labeller = as_labeller(labnames))       +
   theme_bw()                                         +
   
@@ -864,6 +840,7 @@ ValGlab <-  ggplot(dattl,
 ### combine them with cow_plot
 
 exG <- plot_grid(ValGlab,ValGapp, ncol=1)
+
 
 
 ## Create AFFECTIVE ratings for figure 1 ####
@@ -913,7 +890,7 @@ datt <- data.frame(Stimulus = character(12),
 datt$Variable <- rep(names(valeapp[2:7]))
 
 
-datt$Phase <- apply(datt,1,function(x) ifelse(+(any(grep("FCQ0", x))),"\nBaseline",
+datt$Phase <- apply(datt,1,function(x) ifelse(+(any(grep("FCQ0", x))),"Baseline",
                                               ifelse(+(any(grep("FCQ1", x))),"Post\nExtinction", "Post\nRenewal")))
 
 
@@ -943,15 +920,10 @@ datt$ci_low <- datt$Mean-(2*datt$SEM)
 datt$ci_high <- datt$Mean+(2*datt$SEM)
 
 
-## make sure factors are correctly ordered 
-
-## Add column for facet to keep fpormatting consistent
-
-datt$Aff <- "Affective ratings"
-
-datt$Phase <- factor(datt$Phase, levels = c("\nBaseline","Post\nExtinction", "Post\nRenewal"))
+## Add phase labels ####
 
 
+### order factor levels ######
 
 datt$Mode <- factor(datt$Mode, 
                     levels = c("Lab","App"))
@@ -961,26 +933,21 @@ datt$Stimulus <- factor(datt$Stimulus,
                         levels = c("CS+","CS-"))
 
 
-datt$Aff <- factor(datt$Aff, levels =c("Affective ratings",""))
+## Add column for facet to keep fpormatting consistent
 
+datt$Aff <- "Affective ratings"
 
 ### seperate into lab and app for aesthetic purposes #####
 
 datta <- datt[(datt$Mode == "App"),]
 dattl <- datt[(datt$Mode == "Lab"),]
 
-### label list
-
-datta$Aff[3:6] <- ""
-dattl$Aff[3:6] <- ""
-
 ## Plot - line version  ####
 
 ValAfapp <-  ggplot(datta,
-                     aes(Mode,Mean,
+                     aes(Phase,Mean,
                          color=Stimulus))         +
-  geom_point(position='dodge',
-             size=2)                       +
+  geom_point(position='dodge')                       +
   geom_line(aes(group = Stimulus))                +
   geom_ribbon(aes(ymin=ci_low, ymax=ci_high,
                   fill=Stimulus,
@@ -988,28 +955,27 @@ ValAfapp <-  ggplot(datta,
               linetype=2, alpha=0.1)               +
   
   scale_fill_manual(values=PMpallette) +
-  facet_grid(. ~ Aff + Phase)             +
+  facet_grid(. ~ Aff, scales = "free_x")             +
   theme_bw()                                         +
   scale_color_manual(values=PMpallette)                +        
-  labs(y="Mean affective rating\n",
+  labs(y="Mean expectancy rating\n",
        subtitle = "\n\n")                 +
   theme(plot.subtitle = element_text(face = "italic",
-                                     size = 28),
+                                     size = caption),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.text = element_text(face = "bold",
-                                 size = 18),
+                                 size = text.axis),
         strip.text = element_text(face = "bold",
-                                  size = 24),
+                                  size = strip.title),
         legend.key = element_rect(size = 3),
-        legend.key.size = unit(3, 'lines'),
+        legend.key.size = unit(size.legend, 'lines'),
         axis.title.y =  element_text(face = "bold",
-                                     size = 28),
+                                  size = title.y),
         axis.title.x =  element_blank(),
         legend.text = element_text(face = "bold",
-                                   size = 20),
-        legend.title = element_text(size = 28),
-        legend.position = c(.95,0.85),
+                                   size = title.x),
+        legend.title = element_text(size = title.legend),
         panel.spacing.x=unit(0, "lines"))              +
   scale_y_continuous(limits = c(0,9),
                      breaks = c(seq(0,9)))      +
@@ -1019,45 +985,42 @@ ValAfapp <-  ggplot(datta,
 
 
 ValAflab <-  ggplot(dattl,
-                    aes(Mode,Mean,
+                    aes(Phase,Mean,
                         color=Stimulus))         +
-  geom_point(position='dodge',
-             size=2)                       +
+  geom_point(position='dodge')                       +
   geom_line(aes(group = Stimulus))                +
   geom_ribbon(aes(ymin=ci_low, ymax=ci_high,
                   fill=Stimulus,
                   group =Stimulus),
               linetype=2, alpha=0.1)               +
   
-  scale_fill_manual(values=PMpallette) +
-  facet_grid(. ~ Aff + Phase)             +
+  scale_fill_manual(values=c(PMpallette)) +
+  facet_grid(. ~ Aff, scales = "free_x")             +
   theme_bw()                                         +
   scale_color_manual(values=PMpallette)                +        
-  labs(y="Mean affective rating\n",
+  labs(y="Mean expectancy rating\n",
        subtitle = "\n\n")                 +
   theme(plot.subtitle = element_text(face = "italic",
-                                     size = 28),
+                                     size = caption),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.text = element_text(face = "bold",
-                                 size = 18),
+                                 size = text.axis),
         strip.text = element_text(face = "bold",
-                                  size = 24),
+                                  size = strip.title),
         legend.key = element_rect(size = 3),
-        legend.key.size = unit(3, 'lines'),
+        legend.key.size = unit(size.legend, 'lines'),
         axis.title.y =  element_text(face = "bold",
-                                     size = 28),
+                                     size = title.y),
         axis.title.x =  element_blank(),
         legend.text = element_text(face = "bold",
-                                   size = 20),
-        legend.title = element_text(size = 28),
-        legend.position = c(.95,0.85),
+                                   size = text.legend),
+        legend.title = element_text(size = title.legend),
         panel.spacing.x=unit(0, "lines"))              +
   scale_y_continuous(limits = c(0,9),
                      breaks = c(seq(0,9)))      +
   # scale_x_continuous(breaks = c(seq(1,3))) +
   theme(plot.margin = unit(c(0.6, 0.6, 0.6, 0.6), "cm"))  
-
 
 
 ## Stack trial by trial AFF ######
@@ -1076,8 +1039,8 @@ exAf <- plot_grid(ValAflab,ValAfapp, ncol=1)
 
 
 Maintitle = "Figure 1. Validation study mean ratings for all stimuli and study phases"
-labsub = "Standard Lab Delivery"
-appsub = "Smartphone App Delivery"
+labsub = "Lab sessions"
+appsub = "App sessions"
 
 l1 <- expression(paste(bold("Figure 1.")," Plots visualising mean ratings per stimuli across all experimental phases for all participants in the validation data, where participants took part in lab and App testing one week apart. ",bold("Panel A")," presents plots showing"))
 l2 <- expression(paste("the average participant expectancy rating for each stimulus for each trial during acquisition, extinction and renewal testing phases for lab", italic(" (top)"), "and App", italic(" (bottom)"), " sessions respectively. Points represent mean and shading",sep=" "))
@@ -1088,25 +1051,12 @@ l5 <- expression(paste("",italic("(Post extinction)"),", and after the renewal p
 
 ## Create the 2 rows #######
 
-ValGlab1 <- ValGlab + theme(plot.margin = unit(c(.6, 0, 1.1, 0), "cm")) 
-Valextlab1 <- Valextlab + theme(plot.margin = unit(c(0.6, 0, 0.6, 0.6), "cm")) 
-ValAflab1 <- ValAflab + theme(plot.margin = unit(c(.05, 0, 1.4, 0), "cm")) 
-
-
-row.1 <- plot_grid(Valextlab1,ValGlab1,ValAflab1,ncol =3,
+row.1 <- plot_grid(Valextlab,ValGlab,ValAflab,ncol =3,
                    labels = "AUTO", label_size = label.size,
-                   rel_widths = c(2,.7,1.2),
-                   rel_heights = c(1,1,1))
-
+                   rel_widths = c(1.2,0.5,0.65))
 row.1 <- plot_grid(NULL, row.1,ncol =1,rel_heights = c(0.1,1))
 
-
-ValGapp1 <- ValGapp + theme(plot.margin = unit(c(1.2, 0, 1.55, 0), "cm")) 
-Valextapp1 <- Valextapp + theme(plot.margin = unit(c(0.6, 0, 0.6, 0.6), "cm")) 
-ValAfapp1 <- ValAfapp + theme(plot.margin = unit(c(1.2, 0, 1.85, 0), "cm")) 
-
-
-row.2 <- plot_grid(Valextapp1,ValGapp1,ValAfapp1,ncol=3, rel_widths = c(2,.7,1.2))
+row.2 <- plot_grid(Valextapp,ValGapp,ValAfapp,ncol=3,rel_widths = c(1.2,0.5,0.65))
 row.2 <- plot_grid(NULL, row.2,ncol =1,rel_heights = c(0.01,1))
 
 
@@ -1116,8 +1066,8 @@ row.1.1 <- row.1 +  draw_label(labsub,
                                fontface='bold',
                                fontfamily = "Trebuchet MS",
                                colour = "black", 
-                               size = 40,
-                               x = 0.55, 
+                               size = 34,
+                               x = 0.09, 
                                y = 1,
                                vjust =1, 
                                hjust =1) 
@@ -1141,8 +1091,8 @@ row.2.1 <- row.2 +  draw_label(appsub,
                                fontface='bold',
                                fontfamily = "Trebuchet MS",
                                colour = "black", 
-                               size = 40,
-                               x = 0.65, 
+                               size = 34,
+                               x = 0.09, 
                                y = 1,
                                vjust =1, 
                                hjust =1) 
@@ -1150,7 +1100,7 @@ row.2.1 <- row.2 +  draw_label(appsub,
 
 ## and final figure (without caption) #########
 
-fig1 <- plot_grid(row.1.1,NULL, row.2.1, NULL, ncol=1, rel_heights = c(1,0.05,1,0.05))
+fig1 <- plot_grid(row.1.1,NULL, row.2.1, NULL, ncol=1, rel_heights = c(1,0.05,.9,0.05))
 
 ## expand plot margins slightly
 
@@ -1162,7 +1112,7 @@ pl1 = add_sub(fig1.1,l1,
               fontface='italic',
               fontfamily = "Trebuchet MS",
               colour = "black", 
-              size = caption,
+              size = 28,
               hjust=0,
               vjust=0,
               x=0.01,
@@ -1174,7 +1124,7 @@ pl2 = add_sub(pl1,l2,
               fontface='italic',
               fontfamily = "Trebuchet MS",
               colour = "black", 
-              size = caption,
+              size = 28,
               hjust=0,
               vjust=1,
               x=0.01,
@@ -1186,7 +1136,7 @@ pl3 = add_sub(pl2,l3,
               fontface='italic',
               fontfamily = "Trebuchet MS",
               colour = "black", 
-              size = caption,
+              size = 28,
               hjust=0,
               vjust=0,
               x=0.01,
@@ -1197,7 +1147,7 @@ pl4 = add_sub(pl3,l4,
                 fontface='italic',
                 fontfamily = "Trebuchet MS",
                 colour = "black", 
-                size = caption,
+                size = 28,
                 hjust=0,
                 vjust=1,
                 x=0.01,
@@ -1208,7 +1158,7 @@ fig1.cap = add_sub(pl4,l5,
                    fontface='italic',
                    fontfamily = "Trebuchet MS",
                    colour = "black", 
-                   size = caption,
+                   size = 28,
                    hjust=0,
                    vjust=1,
                    x=0.01,
@@ -1373,22 +1323,22 @@ ValAFtest <-  ggplot(dat,
   labs(y="Mean affective rating",
        subtitle = "\n\n")                 +
   theme(plot.subtitle = element_text(face = "italic",
-                                     size = 28),
+                                     size = caption),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.text = element_text(face = "bold",
-                                 size = 22),
+                                 size = text.axis),
         strip.text = element_text(face = "bold",
-                                  size = 28),
+                                  size = strip.title),
         legend.key = element_rect(size = 3),
-        legend.key.size = unit(3, 'lines'),
+        legend.key.size = unit(size.legend, 'lines'),
         axis.title.y =  element_text(face = "bold",
-                                     size = 26),
+                                     size = title.y),
         axis.title.x =  element_blank(),
         legend.text = element_text(face = "bold",
-                                   size = 24),
+                                   size = text.legend),
         legend.title = element_text(face = "bold",
-                                    size = 26),
+                                    size = title.legend),
         panel.spacing.x=unit(0, "lines"))                         + 
   scale_y_continuous(limits = c(0,9),
                      breaks = c(seq(0,9)))                       +
@@ -1531,22 +1481,22 @@ Valexttest <-  ggplot(date,
   labs(y="Mean expectancy rating",
        subtitle = "\n\n")                 +
   theme(plot.subtitle = element_text(face = "italic",
-                                     size = 28),
+                                     size = caption),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.text = element_text(face = "bold",
-                                 size = 22),
+                                 size = text.axis),
         strip.text = element_text(face = "bold",
-                                  size = 28),
-        legend.key = element_rect(size = 3),
-        legend.key.size = unit(3, 'lines'),
+                                  size = strip.title),
+        legend.key = element_rect(size = size.legend),
+        legend.key.size = unit(size.legend, 'lines'),
         axis.title.y =  element_text(face = "bold",
-                                     size = 26),
+                                     size = title.y),
         axis.title.x =  element_blank(),
         legend.text = element_text(face = "bold",
-                                   size = 24),
+                                   size = text.legend),
         legend.title = element_text(face = "bold",
-                                    size = 26),
+                                    size = title.legend),
         panel.spacing.x=unit(0, "lines"))     + 
   scale_y_continuous(limits = c(0,9),
                      breaks = c(seq(0,9)))    
@@ -1721,7 +1671,7 @@ afan <- afan + theme(plot.margin = unit(c(0.6, 0.6, 0.6, 0.6), "cm"))
 
 alltogethernow <- plot_grid(exan,afan,nrow = 2,rel_heights = c(3,2),
                             labels="AUTO",
-                            label_size = 32)
+                            label_size = label.size)
 
 wlegend <- plot_grid(alltogethernow,leg,
                      rel_widths = c(1.7,.4),
@@ -1846,6 +1796,11 @@ dev.off()
 
 ## FIGURE 3: ANXIETY ######
 
+## read in anxiety correlation table ####
+
+anx <- read.csv("/Volumes/groups/Eley Group/Kirstin/FLARe_Analyses/Validation/AnxCorrelations/Datasets/Anxiety_corr_bootstrappedCI_table.csv",
+                header = T)
+
 
 ## set up factor orders ###
 
@@ -1923,22 +1878,22 @@ anxexp <-  ggplot(anxex,
   labs(y="Pearson's r",
        subtitle = "\n\n")                 +
   theme(plot.subtitle = element_text(face = "italic",
-                                     size = 28),
+                                     size = caption),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.text = element_text(face = "bold",
-                                 size = 22),
+                                 size = text.axis),
         strip.text = element_text(face = "bold",
-                                  size = 28),
-        legend.key = element_rect(size = 3),
-        legend.key.size = unit(3, 'lines'),
+                                  size = strip.title),
+        legend.key = element_rect(size = size.legend),
+        legend.key.size = unit(size.legend, 'lines'),
         axis.title.y =  element_text(face = "bold",
-                                     size = 26),
+                                     size = title.y),
         axis.title.x =  element_blank(),
         legend.text = element_text(face = "bold",
-                                   size = 24),
+                                   size = text.legend),
         legend.title = element_text(face = "bold",
-                                    size = 26),
+                                    size = title.legend),
         panel.spacing.x=unit(0, "lines"))     + 
   scale_y_continuous(limits = c(0,0.8),
                      labels = scales::comma)
@@ -1966,22 +1921,22 @@ anxafp <-  ggplot(anxaf,
   labs(y="Pearson's r",
        subtitle = "\n\n")                 +
   theme(plot.subtitle = element_text(face = "italic",
-                                     size = 28),
+                                     size = caption),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.text = element_text(face = "bold",
-                                 size = 22),
+                                 size = text.axis),
         strip.text = element_text(face = "bold",
-                                  size = 28),
-        legend.key = element_rect(size = 3),
-        legend.key.size = unit(3, 'lines'),
+                                  size = strip.title),
+        legend.key = element_rect(size = size.legend),
+        legend.key.size = unit(size.legend, 'lines'),
         axis.title.y =  element_text(face = "bold",
-                                     size = 26),
+                                     size = title.y),
         axis.title.x =  element_blank(),
         legend.text = element_text(face = "bold",
-                                   size = 24),
+                                   size = text.legend),
         legend.title = element_text(face = "bold",
-                                    size = 26),
+                                    size = title.legend),
         panel.spacing.x=unit(0, "lines"))     + 
   scale_y_continuous(limits = c(0,0.8),
                      labels = scales::comma)
@@ -1995,8 +1950,7 @@ anxtext <- subset(anxaf, select = c("Modality","Stimulus","Phase","psym","p", "r
 anxtext$x <- 0.78
 anxtext$x[2] <- 1.23
 anxtext$y[2] <- 0.45
-anxtext$x[7] <- 1.78
-anxtext$y[7] <- 0.45
+
 
 anxaf1 <- anxafp + geom_text(data=anxtext,aes(Modality,label=psym,y=y,x=x),size=11,na.rm=T)
 
@@ -2045,7 +1999,7 @@ afanx <- anxaf1 + theme(plot.margin = unit(c(0.3, 0.3, 0.3, 0.3), "cm"))
 
 alltog <- plot_grid(exanx,afanx,nrow = 2,rel_heights = c(5,3),
                             labels="AUTO",
-                            label_size = 32)
+                            label_size = label.size)
 
 
 ## Add captions and titles #####
@@ -2193,16 +2147,16 @@ dev.off()
 ## FIGURE 4: ICC ######
 
 ## read in the tables 
-# tabs <- "/Volumes/groups/Eley Group/Kirstin/FLARe_Analyses/ICC_tables_allstudies/"
-# val1 <- read.csv(paste(tabs,"Validation_ICC_table_complete.csv",sep=""))
-# app1 <- read.csv(paste(tabs,"AppTRT_ICC_table_complete.csv",sep=""))
-# lab1 <- read.csv(paste(tabs,"LabTRT_ICC_table_complete.csv",sep=""))
-# anx <- read.csv("/Volumes/groups/Eley Group/Kirstin/FLARe_Analyses/Validation/AnxCorrelations/Datasets/Anxiety_corr_bootstrappedCI_table.csv",
-#                 header = T)
+tabs <- "/Volumes/groups/Eley Group/Kirstin/FLARe_Analyses/ICC_tables_allstudies/"
+val <- read.csv(paste(tabs,"Validation_ICC_table_complete.csv",sep=""))
+app <- read.csv(paste(tabs,"AppTRT_ICC_table_complete.csv",sep=""))
+lab <- read.csv(paste(tabs,"LabTRT_ICC_table_complete.csv",sep=""))
+anx <- read.csv("/Volumes/groups/Eley Group/Kirstin/FLARe_Analyses/Validation/AnxCorrelations/Datasets/Anxiety_corr_bootstrappedCI_table.csv",
+                header = T)
 
 ## merge the ICC ones
 
-dat <- rbind(val1,lab1,app1)
+dat <- rbind(val,lab,app)
 
 ## drop percent change for generalisation and app/lab first from validation, and seperate out the generalisation group
 
@@ -2269,22 +2223,22 @@ div <- ggplot(dat, aes(x=Study,
   labs(y="\nIntraclass Correlation",
        subtitle = "\n\n")                 +
   theme(plot.subtitle = element_text(face = "italic",
-                                     size = 38),
+                                     size = caption),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.text = element_text(face = "bold",
-                                 size = 32),
+                                 size = text.axis),
         strip.text = element_text(face = "bold",
-                                  size = 38),
-        legend.key = element_rect(size = 3),
-        legend.key.size = unit(3, 'lines'),
+                                  size = strip.title),
+        legend.key = element_rect(size = size.legend),
+        legend.key.size = unit(size.legend, 'lines'),
         axis.title.x =  element_text(face = "bold",
-                                     size = 36),
+                                     size = title.x),
         axis.title.y =  element_blank(),
         legend.text = element_text(face = "bold",
-                                   size = 34),
+                                   size = text.legend),
         legend.title = element_text(face = "bold",
-                                    size = 36),
+                                    size = title.legend),
         panel.spacing.x=unit(0, "lines"),
         legend.position = "none")     + 
   scale_y_continuous(limits = c(-1,1),
@@ -2314,22 +2268,22 @@ diva <- ggplot(data, aes(x=Study,
   labs(y="\nIntraclass Correlation",
        subtitle = "\n\n")                 +
   theme(plot.subtitle = element_text(face = "italic",
-                                     size = 38),
+                                     size = caption),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.text = element_text(face = "bold",
-                                 size = 32),
+                                 size = text.axis),
         strip.text = element_text(face = "bold",
-                                  size = 38),
-        legend.key = element_rect(size = 3),
-        legend.key.size = unit(3, 'lines'),
+                                  size = strip.title),
+        legend.key = element_rect(size = size.legend),
+        legend.key.size = unit(size.legend, 'lines'),
         axis.title.x =  element_text(face = "bold",
-                                     size = 36),
+                                     size = title.x),
         axis.title.y =  element_blank(),
         legend.text = element_text(face = "bold",
-                                   size = 34),
+                                   size = text.legend),
         legend.title = element_text(face = "bold",
-                                    size = 36),
+                                    size = title.legend),
         legend.position = "left",
         legend.title.align=0.5,
         panel.spacing.x=unit(0, "lines"))     + 
@@ -2365,26 +2319,26 @@ divg <- ggplot(datg, aes(x=Study,
   labs(y="\nIntraclass Correlation\n",
        subtitle = "\n\n")                 +
   theme(plot.subtitle = element_text(face = "italic",
-                                     size = 38),
+                                     size = caption),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.text = element_text(face = "bold",
-                                 size = 32),
+                                 size = text.axis),
         strip.text = element_text(face = "bold",
-                                  size = 38),
-        legend.key = element_rect(size = 3),
-        legend.key.size = unit(3, 'lines'),
+                                  size = strip.title),
+        legend.key = element_rect(size = size.legend),
+        legend.key.size = unit(size.legend, 'lines'),
         # axis.title.x =  element_text(face = "bold",
-        #                              size = 26),
+        #                              size = title.x),
         axis.title.x= element_blank(),
         axis.text.x = element_text(angle = 40,  hjust=1),
      # axis.ticks.y = element_blank(),
         axis.title.y =  element_text(face = "bold",
-                                     size = 36),
+                                     size = title.y),
         legend.text = element_text(face = "bold",
-                                  size = 34),
+                                  size = text.legend),
         legend.title = element_text(face = "bold",
-                                    size = 36),
+                                    size = title.legend),
      legend.position = "none",
         panel.spacing.x=unit(0, "lines"))     + 
   scale_y_continuous(limits = c(0,1),
@@ -2398,7 +2352,7 @@ divg <- ggplot(datg, aes(x=Study,
 
 plot2 <- plot_grid(div,diva,
                    labels = "AUTO",
-                   label_size=32,
+                   label_size=label.size,
                    rel_widths = c(1,1.2))
 
 plot2mar <- plot2 + theme(plot.margin = unit(c(1, 1, 1, 1), "cm"))
@@ -2408,7 +2362,7 @@ plot <- plot_grid(plot2mar,divg,
                   nrow=2,
                   rel_heights = c(3,1.5),
                   rel_widths = c(1,1.4),
-                  label_size=32)
+                  label_size=label.size)
                    
              
 
